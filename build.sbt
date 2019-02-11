@@ -1,6 +1,7 @@
 // See LICENSE for license details.
-organization := "com.sifive"
-name := "freedom"
+// Modifications copyright (C) 2019 Hex-Five
+organization := "com.hex-five"
+name := "x300"
 version := "0.1.0"
 
 lazy val commonSettings = Seq(
@@ -25,14 +26,10 @@ lazy val sifiveBlocks = (project in file("sifive-blocks")).
   dependsOn(rocketChip).
   settings(commonSettings: _*)
 
-lazy val nvdlaBlocks = (project in file("nvidia-dla-blocks")).
-  dependsOn(rocketChip).
-  settings(commonSettings: _*)
-
 lazy val fpgaShells = (project in file("fpga-shells")).
   dependsOn(rocketChip, sifiveBlocks).
   settings(commonSettings: _*)
 
-lazy val freedomPlatforms = (project in file(".")).
-  dependsOn(rocketChip, sifiveBlocks, nvdlaBlocks, fpgaShells).
+lazy val x300 = (project in file(".")).
+  dependsOn(rocketChip, sifiveBlocks, fpgaShells).
   settings(commonSettings: _*)

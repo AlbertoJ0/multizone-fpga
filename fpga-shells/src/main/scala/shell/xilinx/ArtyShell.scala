@@ -1,4 +1,5 @@
 // See LICENSE for license details.
+// Modifications copyright (C) 2018-2019 Hex-Five
 package sifive.fpgashells.shell.xilinx.artyshell
 
 import Chisel._
@@ -70,6 +71,21 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
   val uart_rxd_out = IO(Analog(1.W))
   val uart_txd_in  = IO(Analog(1.W))
 
+  // PHY0
+  val eth_col      = IO(Analog(1.W))
+  val eth_crs      = IO(Analog(1.W))
+  val eth_mdc      = IO(Analog(1.W))
+  val eth_mdio     = IO(Analog(1.W))
+  val eth_ref_clk  = IO(Analog(1.W))
+  val eth_rstn     = IO(Analog(1.W))
+  val eth_rx_clk   = IO(Analog(1.W))
+  val eth_rx_dv    = IO(Analog(1.W))
+  val eth_rxd      = IO(Vec(4, Analog(1.W)))
+  val eth_rxerr    = IO(Analog(1.W))
+  val eth_tx_clk   = IO(Analog(1.W))
+  val eth_tx_en    = IO(Analog(1.W))
+  val eth_txd      = IO(Vec(4, Analog(1.W)))
+
   // JA (Used for more generic GPIOs)
   val ja_0         = IO(Analog(1.W))
   val ja_1         = IO(Analog(1.W))
@@ -105,6 +121,7 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
   val clock_8MHz     = Wire(Clock())
   val clock_32MHz    = Wire(Clock())
   val clock_65MHz    = Wire(Clock())
+  val clock_25MHz    = Wire(Clock())
 
   val mmcm_locked    = Wire(Bool())
 
@@ -131,11 +148,18 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
   val ip_mmcm = Module(new mmcm())
 
   ip_mmcm.io.clk_in1 := CLK100MHZ
-  clock_8MHz         := ip_mmcm.io.clk_out1  // 8.388 MHz = 32.768 kHz * 256
-  clock_65MHz        := ip_mmcm.io.clk_out2  // 65 Mhz
-  clock_32MHz        := ip_mmcm.io.clk_out3  // 65/2 Mhz
+  clock_25MHz        := ip_mmcm.io.clk_out1  // 25 Mhz
+  clock_8MHz         := ip_mmcm.io.clk_out2  // 8.388 MHz = 32.768 kHz * 256
+  clock_65MHz        := ip_mmcm.io.clk_out3  // 65 Mhz
+  clock_32MHz        := ip_mmcm.io.clk_out4  // 65/2 Mhz
   ip_mmcm.io.resetn  := ck_rst
   mmcm_locked        := ip_mmcm.io.locked
+
+  //-----------------------------------------------------------------------
+  // Drive external clocks
+  //-----------------------------------------------------------------------
+  // PHY chip needs 25 MHz
+  IOBUF(eth_ref_clk, clock_25MHz.asUInt.toBool)
 
   //-----------------------------------------------------------------------
   // System Reset
@@ -243,5 +267,4 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
       dut.uart(0).rxd := IOBUF(uart_txd_in)
     }
   }
-
 }
