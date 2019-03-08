@@ -46,6 +46,12 @@ class WithDTSTimebase(timebase: Int) extends Config((site, here, up) =>
   case DTSTimebase => BigInt(timebase)
 })
 
+class WithMVendorID(mvendorid: Int) extends Config((site, here, up) =>
+{
+  case RocketTilesKey => up(RocketTilesKey, site) map { r =>
+    r.copy(core = r.core.copy(mvendorid = mvendorid)) }
+})
+
 class WithJtagDTMConfig(idcodeVersion: Int, idcodePartNum: Int, idcodeManufId: Int, debugIdleCycles: Int) extends Config((site, here, up) =>
 {
   case JtagDTMKey => new JtagDTMConfig (
@@ -87,10 +93,11 @@ class X300ArtyDevKitConfig extends Config(
   new X300ArtyDevKitPeripherals ++
   new WithDTSTimebase(32768)    ++
   new WithJtagDTMConfig(
-      idcodeVersion = 2,
-      idcodePartNum = 0x000,
-      idcodeManufId = 0x489,
+      idcodeVersion = 1,
+      idcodePartNum = 0x300,
+      idcodeManufId = 0x57C,
       debugIdleCycles = 5)      ++
+  new WithMVendorID(0x57C)      ++
   new WithNBreakpoints(8)       ++
   new WithNExtTopInterrupts(0)  ++
   new WithJtagDTM               ++
