@@ -3,7 +3,8 @@
 This repository contains the X300, a secure version of [SiFive's Freedom E300
 Platform](https://github.com/sifive/freedom/tree/3624efff1819e52cec30c72f9085158189f8b53f)
 modified to work with the free and open [MultiZone Secure IoT Stack](https://github.com/hex-five/multizone-secure-iot-stack).
-Here's a comparison between the E300 and the X300:
+
+Feature comparison between E300 (not secure) and X300 (secure):
 
 | E300             | X300                                         |
 | ---------------- | -------------------------------------------- |
