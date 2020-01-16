@@ -1,8 +1,8 @@
 # X300
 
-This repository contains the X300, a modified version of [SiFive's Freedom E300
+This repository contains the X300, a secure version of [SiFive's Freedom E300
 Platform](https://github.com/sifive/freedom/tree/3624efff1819e52cec30c72f9085158189f8b53f)
-to support [MultiZone](https://hex-five.com/products/) and IoT applications.
+modified to work with the free and open [MultiZone Secure IoT Stack](https://github.com/hex-five/multizone-secure-iot-stack).
 Here's a comparison between the E300 and the X300:
 
 | E300             | X300                                         |
@@ -32,7 +32,7 @@ board.
 ### Vivado 2017.1 (or later)
 
 You'll need Vivado to synthesize the bistream for the Arty FPGA. You should
-have received a single node license and instructions how to install Vivado with
+have received a Xilinx single node license and instructions how to install Vivado with
 your Arty FPGA Dev Kit.
 
 ### RISC-V Toolchain
