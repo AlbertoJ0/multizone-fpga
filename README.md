@@ -18,9 +18,8 @@ Feature comparison between E300 (not secure) and X300 (secure):
 | no perf counters | 2 perf counters, hpmcounter3 and hpmcounter4 |
 | no CLICs         | 3 CLICs (BTN0, BTN1 and BTN2)                |
 
-Like the Freedom E300 Arty FPGA Dev Kit, the X300 is designed to be mapped onto
-an [Arty FPGA Evaluation
-Kit](https://www.xilinx.com/products/boards-and-kits/arty.html).
+Like the Freedom E300 Arty FPGA Dev Kit, The X300 is designed to be mapped onto an [Artix-7 35T Arty FPGA Evaluation Kit](https://www.xilinx.com/products/boards-and-kits/arty.html).
+
 
 ### Bootrom
 
