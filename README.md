@@ -51,6 +51,11 @@ $ cd multizone-fpga
 $ git submodule update --init --recursive
 ```
 
+### Additional requirements
+
+More info about Chisel requirements like Scala and cbt can be found at [https://github.com/sifive/freedom/blob/master/README.md](https://github.com/sifive/freedom/blob/master/README.md)
+
+
 ## Building
 
 To compile the bistream, run
