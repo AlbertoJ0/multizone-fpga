@@ -1,3 +1,5 @@
+# See LICENSE for license details.
+# Modifications copyright (C) 2018-2019 Hex-Five
 ## This file is a general .xdc for the ARTY Rev. B
 ## To use it in a project:
 ## - uncomment the lines corresponding to used pins

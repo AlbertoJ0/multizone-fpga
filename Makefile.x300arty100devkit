@@ -1,13 +1,13 @@
 # See LICENSE for license details.
 # Modifications copyright (C) 2019 Hex-Five
 base_dir := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-BUILD_DIR := $(base_dir)/builds/x300artydevkit
+BUILD_DIR := $(base_dir)/builds/x300arty100devkit
 FPGA_DIR := $(base_dir)/fpga-shells/xilinx
 MODEL := X300ArtyDevKitFPGAChip
 PROJECT := hexfive.x300artydevkit
 export CONFIG_PROJECT := hexfive.x300artydevkit
 export CONFIG := X300ArtyDevKitConfig
-export BOARD := arty
+export BOARD := arty_a7_100
 export BOOTROM_DIR := $(base_dir)/bootrom/xip
 
 rocketchip_dir := $(base_dir)/rocket-chip

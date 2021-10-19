@@ -1,4 +1,5 @@
 # See LICENSE for license details.
+# Modifications copyright (C) 2021 Hex Five Security, Inc.
 
 create_ip -vendor xilinx.com -library ip -name clk_wiz -module_name mmcm -dir $ipdir -force
 set_property -dict [list \
@@ -7,9 +8,11 @@ set_property -dict [list \
 	CONFIG.CLKOUT1_USED {true} \
         CONFIG.CLKOUT2_USED {true} \
         CONFIG.CLKOUT3_USED {true} \
-	CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {8.388} \
-        CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {65.000} \
-        CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {32.500} \
+        CONFIG.CLKOUT4_USED {true} \
+	CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {25.00} \
+        CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {8.388} \
+        CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {65.000} \
+        CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {32.500} \
 	] [get_ips mmcm]
 
 create_ip -vendor xilinx.com -library ip -name proc_sys_reset -module_name reset_sys -dir $ipdir -force
@@ -42,3 +45,15 @@ set_property -dict [list \
 	CONFIG.C_PROBE14_WIDTH {97} \
 	] [get_ips ila]
 
+create_ip -vendor xilinx.com -library ip -name axi_ethernetlite -module_name axiethernetlite -dir $ipdir -force
+set_property -dict [list \
+	CONFIG.C_S_AXI_PROTOCOL {AXI4} \
+	CONFIG.AXI_ACLK_FREQ_MHZ {65} \
+	CONFIG.C_DUPLEX {1} \
+	CONFIG.C_TX_PING_PONG {1} \
+	CONFIG.C_RX_PING_PONG {1} \
+	CONFIG.C_INCLUDE_INTERNAL_LOOPBACK {0} \
+	CONFIG.C_INCLUDE_GLOBAL_BUFFERS {0} \
+	CONFIG.C_INCLUDE_MDIO {1} \
+	CONFIG.C_S_AXI_ID_WIDTH {1} \
+	] [get_ips axiethernetlite]

@@ -267,4 +267,5 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
       dut.uart(0).rxd := IOBUF(uart_txd_in)
     }
   }
+
 }
