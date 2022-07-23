@@ -19,13 +19,13 @@ Feature comparison between E300 (not secure) and X300 (secure):
 
 Like the Freedom E300 Arty FPGA Dev Kit, the X300 is designed to work with the [Digilent Arty A7 FPGA Evaluation Kit](https://digilent.com/reference/programmable-logic/arty-a7/start) in the 35T or 100T version.
 
-### Bootrom
+### Bootrom & Trusted Firmware
 
-The default bootrom consists of a program that immediately jumps to address 0x20400000, which is 0x00400000 bytes into the SPI flash memory on the Arty board. The provided bitstream files includes no firmware. A fully functional state-of-the-art secure firmware stack for this device is available at https://github.com/hex-five/multizone-iot-sdk. 
+The default bootrom consists of a program that immediately jumps to address 0x20400000, which is 0x400000 bytes into the SPI flash memory on the Arty board. The default bitstream files include no other firmware. A fully functional state-of-the-art trusted firmware stack for this device is available at https://github.com/hex-five/multizone-iot-sdk and included pre-built in the alternative bitstreams [multizone-iot-sdk-arty-35t.mcs](https://github.com/hex-five/multizone-fpga/releases/download/v2.0.0/multizone-iot-sdk-arty-35t.mcs) and [multizone-iot-sdk-arty-100t.mcs](https://github.com/hex-five/multizone-fpga/releases/download/v2.0.0/multizone-iot-sdk-arty-100t.mcs).
 
 ### Quick Start
 
-Prebuilt bitstream files are provided as release assets ready to download and program.
+Prebuilt bitstream files are provided as release assets ready to download and program (no firmware).
 
 - [X300ArtyA7-35T.mcs](https://github.com/hex-five/multizone-fpga/releases/download/v2.0.0/X300ArtyA7-35T.mcs)
 - [X300ArtyA7-100T.mcs](https://github.com/hex-five/multizone-fpga/releases/download/v2.0.0/X300ArtyA7-100T.mcs)
@@ -56,6 +56,7 @@ $ git clone https://github.com/hex-five/multizone-fpga.git
 $ cd multizone-fpga
 $ git submodule update --init --recursive --jobs 8
 ```
+*Note: you can safely ignore git messages about missing submodules. The only submodule required to build the fpga bitstream is rocket-chip (v1.2-032519-SNAPSHOT~138).*
 
 In order to make the `mcs` target, you need the Vivado executable on your `PATH` and the `RISCV` environment variable pointing to your local toolchain. Change these values according to your setup:
 ```
@@ -74,7 +75,7 @@ or
 $ make -f Makefile.x300arty100devkit mcs
 ```
 
-*Note: if the first build ends prematurely after resolving Scala dependencies, just reenter the command a second time.*
+*Note: the first run of the build may end prematurely if scala dependencies are not up-to-date. Just reenter the make command above until all scala requirements are met.*
 
 
 These will place the bitstream file `X300ArtyDevKitFPGAChip.mcs` under `builds/x300artyXXXdevkit/obj`.
