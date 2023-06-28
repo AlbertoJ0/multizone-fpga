@@ -1,0 +1,4 @@
+make CONFIG=X300MyRoCC2 -f Makefile.x300arty100devkit mcs
+make -f Makefile.x300arty100devkit mcs
+
+cp builds/x300arty100devkit/obj/X300ArtyDevKitFPGAChip.mcs mcs_builds/x300MyRocc2.mcs
