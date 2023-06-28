@@ -9,7 +9,7 @@ import freechips.rocketchip.devices.tilelink._
 import freechips.rocketchip.diplomacy.{DTSModel, DTSTimebase}
 import freechips.rocketchip.system._
 import freechips.rocketchip.tile._
-
+import RoCCPrac._
 import sifive.blocks.devices.mockaon._
 import sifive.blocks.devices.gpio._
 import sifive.blocks.devices.pwm._
@@ -111,6 +111,33 @@ class X300ArtyDevKitConfig extends Config(
   new WithITIMAddr(0x08000000)  ++
   new WithLocalInterrupts(3)    ++
   new WithPerfCounters(2)       ++
+  new With1TinyCore             ++
+  new BaseConfig
+)
+class X300MyRoCC2 extends Config(
+  new X300ArtyDevKitPeripherals ++
+  new WithDTSTimebase(32768)    ++
+  new WithJtagDTMConfig(
+      idcodeVersion = 1,
+      idcodePartNum = 0x300,
+      idcodeManufId = 0x57C,
+      debugIdleCycles = 5)      ++
+  new WithMVendorID(0x57C)      ++
+  new WithNBreakpoints(8)       ++
+  new WithNExtTopInterrupts(0)  ++
+  new WithJtagDTM               ++
+  new WithNoMemPort             ++
+  new WithNoMMIOPort            ++
+  new WithNMemoryChannels(0)    ++
+  new WithNBanks(0)             ++
+  new WithL1ICacheWays(4)       ++
+  new WithL1DCacheSets(1024)    ++
+  new WithUserMode              ++
+  new WithITIMAddr(0x08000000)  ++
+  new WithLocalInterrupts(3)    ++
+  new WithPerfCounters(2)       ++
+    // agrega la Config
+    new WithMyRoCC2 ++
   new With1TinyCore             ++
   new BaseConfig
 )
